@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:chewie/chewie.dart' as lib;
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:video_player/video_player.dart' as lib;
+import 'package:cached_video_player/cached_video_player.dart' as lib;
 
 /// A video player.
 class VideoPlayer extends StatefulWidget {
@@ -66,7 +66,7 @@ class VideoPlayer extends StatefulWidget {
 class _VideoPlayerState extends State<VideoPlayer> {
   lib.ChewieController? _controller;
   dynamic _error;
-  lib.VideoPlayerController? _vpc;
+  lib.CachedVideoPlayerController? _vpc;
 
   Widget? get placeholder =>
       widget.poster != null ? Center(child: widget.poster) : null;
@@ -118,7 +118,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   Future<void> _initControllers() async {
     // TODO: remove lint ignore when our minimum video_player version >= 2.7
     // ignore: deprecated_member_use
-    final vpc = _vpc = lib.VideoPlayerController.network(widget.url);
+    final vpc = _vpc = lib.CachedVideoPlayerController.network(widget.url);
     Object? vpcError;
     try {
       await vpc.initialize();
